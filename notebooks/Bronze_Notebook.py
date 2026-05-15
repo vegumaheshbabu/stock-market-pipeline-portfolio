@@ -33,6 +33,8 @@ consumer.subscribe(['Stock-market-data'])
 messages = []
 print("📡 Reading from Kafka topic...")
 
+print("test")
+
 start = time.time()
 while time.time() - start < 30:  # read for 30 seconds
     msg = consumer.poll(1.0)
