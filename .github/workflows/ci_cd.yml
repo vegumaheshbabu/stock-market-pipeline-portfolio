@@ -39,5 +39,7 @@ jobs:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: |
-          databricks workspace import_dir notebooks/ /stock-market-pipeline --overwrite
-          echo "✅ Notebooks deployed to Databricks!"
+          databricks workspace import notebooks/Bronze_Notebook.py /Users/vmahi.026@gmail.com/Bronze_Notebook --language PYTHON --overwrite
+          databricks workspace import notebooks/Silver_Notebook.py /Users/vmahi.026@gmail.com/Silver_Notebook --language PYTHON --overwrite
+          databricks workspace import notebooks/Gold_Notebook.py /Users/vmahi.026@gmail.com/Gold_Notebook --language PYTHON --overwrite
+          echo "✅ Notebooks deployed to correct Databricks location!"
