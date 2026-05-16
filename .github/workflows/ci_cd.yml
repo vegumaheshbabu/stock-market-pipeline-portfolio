@@ -59,6 +59,8 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           script: |
             cd /home/ubuntu
-            curl -o /home/ubuntu/producer.py https://raw.githubusercontent.com/vegumaheshbabu/stock-market-pipeline/main/notebooks/producer.py
+            curl -H "Authorization: token ${{ secrets.PAT_TOKEN }}" \
+              -o /home/ubuntu/producer.py \
+              https://raw.githubusercontent.com/vegumaheshbabu/stock-market-pipeline/main/notebooks/producer.py
             echo "✅ Producer updated!"
-            cat /home/ubuntu/producer.py | head -5
+            head -5 /home/ubuntu/producer.py
