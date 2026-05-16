@@ -2,9 +2,8 @@ from confluent_kafka import Producer
 import requests
 import json
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 
-# Confluent credentials — replace with your NEW cluster details
 BOOTSTRAP_SERVER = "pkc-921jm.us-east-2.aws.confluent.cloud:9092"
 API_KEY = "J6QAE6QW673ZKOEI"
 API_SECRET = "cflt8RTenN5IuMenC5s83rR45U61qpupKzcsifpBG+/5wGYoTnbAMeIakJkf6pYQ"
@@ -18,11 +17,7 @@ conf = {
 }
 
 producer = Producer(conf)
-
-# Finnhub API key
 FINNHUB_KEY = "d7h39h1r01qhiu0a3qp0d7h39h1r01qhiu0a3qpg"
-
-# Stock symbols — we can add more later
 SYMBOLS = ["AAPL", "GOOGL", "MSFT"]
 
 def fetch_stock(symbol):
@@ -36,7 +31,7 @@ def fetch_stock(symbol):
             "low": float(response["l"]),
             "open": float(response["o"]),
             "prev_close": float(response["pc"]),
-            "timestamp": datetime.utcnow().isoformat()
+            "timestamp": datetime.now(timezone.utc).isoformat()
         }
     except Exception as e:
         print(f"Error fetching {symbol}:", response)
@@ -48,18 +43,18 @@ def delivery_report(err, msg):
     else:
         print(f"Delivered to {msg.topic()} partition {msg.partition()}")
 
-while True:
-    for symbol in SYMBOLS:
-        stock = fetch_stock(symbol)
-        if stock:
-            producer.produce(
-                "Stock-market-data",  # your new topic name
-                json.dumps(stock),
-                callback=delivery_report
-            )
-            producer.flush()
-            print(f"Sent: {stock}")
-        time.sleep(2)  # small gap between each symbol
+for symbol in SYMBOLS:
+    stock = fetch_stock(symbol)
+    if stock:
+        producer.produce(
+            "Stock-market-data",
+            json.dumps(stock),
+            callback=delivery_report
+        )
+        producer.flush()
+        print(f"Sent: {stock}")
+    time.sleep(2)
 
-    print("Sleeping 24 hours...")
-    time.sleep(86400) 
+print("Done! Cron will run again tomorrow.")
+
+print("Test CICD working ")
