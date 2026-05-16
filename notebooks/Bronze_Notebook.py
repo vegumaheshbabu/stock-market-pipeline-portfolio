@@ -33,7 +33,7 @@ consumer.subscribe(['Stock-market-data'])
 messages = []
 print("📡 Reading from Kafka topic...")
 
-print("test")
+print("new ci cd test with new account")
 
 start = time.time()
 while time.time() - start < 30:  # read for 30 seconds
