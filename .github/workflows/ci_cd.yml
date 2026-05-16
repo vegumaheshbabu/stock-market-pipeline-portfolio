@@ -43,3 +43,21 @@ jobs:
           databricks workspace import notebooks/Silver_Notebook.py /Workspace/Users/saivenkata0206@gmail.com/stock-market-pipeline/notebooks/Silver_Notebook --language PYTHON --overwrite
           databricks workspace import notebooks/Gold_Notebook.py /Workspace/Users/saivenkata0206@gmail.com/stock-market-pipeline/notebooks/Gold_Notebook --language PYTHON --overwrite
           echo "✅ Notebooks deployed to correct Databricks location!"
+
+  deploy_producer:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Deploy producer to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            cd /home/ubuntu
+            curl -O https://raw.githubusercontent.com/vegumaheshbabu/stock-market-pipeline/main/notebooks/producer.py
+            echo "✅ Producer deployed to EC2!"
