@@ -1,2 +1,3 @@
 # Stock Market Pipeline
-<img width="1600" height="980" alt="image" src="https://github.com/user-attachments/assets/ad38667f-8a27-4a92-bdb0-256f217a92c8" />
+<img width="707" height="606" alt="image" src="https://github.com/user-attachments/assets/f009847d-5872-420f-8208-7533ae367ba2" />
+
