@@ -6,9 +6,9 @@ import json
 import time
 from datetime import datetime, timezone
 
-BOOTSTRAP_SERVER = "pkc-921jm.us-east-2.aws.confluent.cloud:9092"
-API_KEY = "J6QAE6QW673ZKOEI"
-API_SECRET = "cflt8RTenN5IuMenC5s83rR45U61qpupKzcsifpBG+/5wGYoTnbAMeIakJkf6pYQ"
+BOOTSTRAP_SERVER = ""
+API_KEY = ""
+API_SECRET = ""
 
 conf = {
     'bootstrap.servers': BOOTSTRAP_SERVER,
@@ -19,7 +19,7 @@ conf = {
 }
 
 producer = Producer(conf)
-FINNHUB_KEY = "d7h39h1r01qhiu0a3qp0d7h39h1r01qhiu0a3qpg"
+FINNHUB_KEY = ""
 SYMBOLS = ["AAPL", "GOOGL", "MSFT"]
 
 def fetch_stock(symbol):

@@ -11,9 +11,9 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import current_timestamp, current_date, lit
 
 # Confluent credentials
-BOOTSTRAP_SERVER = "pkc-921jm.us-east-2.aws.confluent.cloud:9092"
-API_KEY = "J6QAE6QW673ZKOEI"
-API_SECRET = "cflt8RTenN5IuMenC5s83rR45U61qpupKzcsifpBG+/5wGYoTnbAMeIakJkf6pYQ"
+BOOTSTRAP_SERVER = ""
+API_KEY = ""
+API_SECRET = ""
 
 # Kafka Consumer config
 conf = {
@@ -32,8 +32,6 @@ consumer.subscribe(['Stock-market-data'])
 # Collect messages
 messages = []
 print("📡 Reading from Kafka topic...")
-
-print("new ci cd test with new account")
 
 start = time.time()
 while time.time() - start < 30:  # read for 30 seconds
